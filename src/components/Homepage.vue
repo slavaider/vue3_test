@@ -1,6 +1,7 @@
 <template>
     <div class="Homepage">
-        {{counter}}
+        {{my_counter}}
+        <button class="btn btn-success" @click="add(5)">Add 5</button>
         <ul class="list-group">
             <li class="list-group-item" v-for="(value,key,index) in items" :key="index">
                 {{index+1}}. {{key}}:{{value}}
@@ -18,8 +19,13 @@
 </template>
 
 <script>
+    import {mapActions, mapGetters} from "vuex";
+
     export default {
         name: 'Homepage',
+        computed: {
+            ...mapGetters({my_counter: 'counter'})
+        },
         data() {
             return {
                 counter: 0,
@@ -39,7 +45,8 @@
         methods: {
             reverseMessage() {
                 this.message = this.message.split('').reverse().join('')
-            }
+            },
+            ...mapActions({add: 'Async_increment'})
         },
         mounted() {
             setInterval(() => this.counter++, 1000)
@@ -47,15 +54,3 @@
     }
 </script>
 
-<style scoped>
-    .Homepage {
-        font-family: sans-serif;
-        border: 1px solid #eee;
-        border-radius: 2px;
-        padding: 20px 30px;
-        margin-top: 1em;
-        margin-bottom: 40px;
-        user-select: none;
-        overflow-x: auto;
-    }
-</style>

@@ -1,16 +1,21 @@
 <template>
-    <div id="app" class="container">
-        <Homepage/>
+    <div>
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <router-link tag="a" class="nav-link" to="/">Home</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link tag="a" class="nav-link" to="/counter">Counter</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link tag="a" class="nav-link" to="/todo">Todo</router-link>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container mt-2">
+            <router-view/>
+        </div>
     </div>
 </template>
-
-<script>
-    import Homepage from './components/Homepage.vue'
-
-    export default {
-        name: 'App',
-        components: {
-            Homepage
-        }
-    }
-</script>

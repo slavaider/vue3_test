@@ -1,8 +1,10 @@
-import {createApp} from 'vue'
-import App from './App.vue'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import {createApp} from 'vue';
+import App from './App.vue';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import router from './router';
+import store from './store';
 
-// Render
-const app = createApp(App)
-app.mount('#app')
-export default app
+createApp(App).use(store).use(router).mount("#app");
+
+
+
