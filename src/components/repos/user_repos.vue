@@ -1,5 +1,12 @@
 <template>
   <div>
+    <label>
+      <input
+        type="text"
+        :value="user"
+        @keyup.enter="user=$event.target.value"
+      >
+    </label>
     <RepositoriesFilters />
     <RepositoriesSortBy />
     <RepositoriesList />
@@ -10,36 +17,34 @@
   import RepositoriesFilters from "@/components/repos/RepositoriesFilters";
   import RepositoriesSortBy from "@/components/repos/RepositoriesSortBy";
   import RepositoriesList from "@/components/repos/RepositoriesList";
+  import {provide, ref} from 'vue'
 
   export default {
     components: {RepositoriesFilters, RepositoriesSortBy, RepositoriesList},
+    setup() {
+      const user = ref('slavaider')
+      provide('user', user)
+      return {
+        user
+      }
+    },
     data() {
       return {
-        user: {name: ''},
-        repositories: [], // 1
-        filters: {}, // 3
+        filters: {
+          words: '',
+          type: null
+        }, // 3
         searchQuery: '' // 2
       }
     },
-    // computed: {
-    //   filteredRepositories() {
-    //   }, // 3
-    //   repositoriesMatchingSearchQuery() {
-    //   }, // 2
-    // },
-    watch: {
-      user: 'getUserRepositories' // 1
-    },
-    mounted() {
-      this.getUserRepositories() // 1
-    },
-    methods: {
-      getUserRepositories() {
-        // using `this.user` to fetch user repositories
-      }, // 1
-      updateFilters() {
+    computed: {
+      filteredRepositories() {
+        return this.repositories.filter((el) => el.name.indexOf(this.filters.words) !== -1)
       }, // 3
-    }
+      repositoriesMatchingSearchQuery() {
+        return this.repositories.filter((el) => el.name.indexOf(this.searchQuery) !== -1)
+      }, // 2
+    },
   }
 </script>
 

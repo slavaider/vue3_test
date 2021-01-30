@@ -56,6 +56,15 @@
             Repos
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link
+            tag="a"
+            class="nav-link"
+            to="/teleport"
+          >
+            teleport
+          </router-link>
+        </li>
       </ul>
     </nav>
 
